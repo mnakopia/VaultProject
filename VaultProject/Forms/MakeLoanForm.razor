@@ -1,0 +1,15 @@
+﻿
+<div class="form">
+    <MudIcon Icon="fas fa-times" class="cancel-icon" @onclick="CloseModal"></MudIcon>
+    <CommunicateLoanExpertForm></CommunicateLoanExpertForm>
+
+</div>
+
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void CloseModal() => MudDialog.Close();
+
+}
+

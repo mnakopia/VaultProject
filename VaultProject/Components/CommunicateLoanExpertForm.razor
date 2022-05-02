@@ -1,0 +1,55 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+<div class="make-loan-form">
+    <h2>მოითხოვე სესხი</h2>
+    <h4>ჩვენი საკრედიტო ოფიცერი დაგიკავშირდებათ და გაგაცნოთ თქვენზე მორგებულ სესხის პირობებს</h4>
+    <EditForm Model="@model" OnValidSubmit="SubmitLoanForm">
+        <DataAnnotationsValidator />
+
+        <MudTextField @bind-Value="model.Name" Label="სახელი" Variant="Variant.Outlined" Class="input"></MudTextField>
+        <MudTextField @bind-Value="model.Surname" Label="გვარი" Variant="Variant.Outlined" Class="input"></MudTextField>
+
+        <MudTextField @bind-Value="model.MobileNumber" Label="ტელეფონის ნომერი" Variant="Variant.Outlined" Class="input" Required></MudTextField>
+        <ValidationMessage For="()=>model.MobileNumber"/>
+
+
+        <MudTextField @bind-Value="model.credit" Label="სასურველი თანხა" Variant="Variant.Outlined" Class="input" />
+        @if (success)
+        {
+            <MudAlert> სესხის ოფიცერი მალე დაგიკავშირდებათ, კითხვების არსებობის შემთხვევაში მოგვმართეთ: +99557565453</MudAlert>
+        }
+       
+
+        <MudButton Class="button" ButtonType="ButtonType.Submit">@(success?"სესხის მოთხოვნა გადაგზავნილია":"მოთხოვნა" )</MudButton>
+    </EditForm>
+</div>
+
+
+
+@code {
+    MakeLoanForm model = new MakeLoanForm();
+    public bool success;
+
+    public class MakeLoanForm
+    {
+        public string? Name { get; set; }
+
+
+        public string? Surname { get; set; }
+
+        [Required(ErrorMessage = "ტელეფონის ნომრის მითითება სავალდებულოა")]
+        public string MobileNumber { get; set; }
+
+
+        public int? credit { get; set; }
+
+    }
+
+    private void SubmitLoanForm(EditContext context)
+    {
+        success = true;
+    }
+
+
+
+}

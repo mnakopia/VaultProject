@@ -1,0 +1,24 @@
+﻿<MudIcon Icon="@((showNavmenu) ? "fa fa-times": "fas fa-bars")" Color="Color.Success" @onclick="ShowHideMenu" Class="menu-icon"></MudIcon>
+@if (showNavmenu)
+{
+
+    <div class="sidebar">
+
+        <MudNavMenu Color="Color.Success" Bordered="true" Class="mud-navmenu">
+            <MudNavLink Href="" Match="NavLinkMatch.All">მთავარი</MudNavLink>
+            <MudNavLink Href="/AgroLoans" Match="NavLinkMatch.Prefix">აგრო სესხი</MudNavLink>
+            <MudNavLink Href="/LoanCalculator" Match="NavLinkMatch.Prefix">სესხის კალკულატორი</MudNavLink>
+            <MudNavLink Href="/Contact" Match="NavLinkMatch.Prefix" Class="navLink">კონტაქტი</MudNavLink>
+        </MudNavMenu>
+    </div>
+}
+@code {
+    public bool showNavmenu { get; set; }
+
+    public void ShowHideMenu()
+    {
+        showNavmenu = !showNavmenu;
+
+    }
+
+}

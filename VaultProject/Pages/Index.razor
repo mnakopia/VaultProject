@@ -1,0 +1,20 @@
+﻿@page "/"
+
+
+
+
+<section class="main-section">
+    <div class="main-section-content">
+        <h1>აგრო სესხი</h1>
+        <p>სასოფლო-სამეურნეო საქმიანობით დაკავებული პირებისთვის</p>
+        <button @onclick="@(() => navigation.NavigateTo("/AgroLoans"))" class="button">გაიგე მეტი</button>
+    </div>
+</section>
+
+
+
+
+<div class="loan-form">
+
+    <CommunicateLoanExpertForm></CommunicateLoanExpertForm>
+</div>

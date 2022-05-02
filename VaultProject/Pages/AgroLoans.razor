@@ -1,0 +1,47 @@
+﻿@page "/AgroLoans"
+<div class="agro-loans-page">
+    <h3>აგრო სესხი</h3>
+    <p>
+        Vault-ის აგრო სესხი განკუთვნილია სასოფლო-სამეურნეო საქმიანობით დაკავებული პირებისთვის, რომელთა შემოსავლის წყაროს აგრო საქმიანობა წარმოადგენს.
+        <br />
+        მნიშვნელობა არ აქვს შემოსავალს სრულად ან ნაწილობრივ ხელზე იღებთ თუ ბანკში გერიცხებათ, ჩვენ დავაფინანსებთ შენს ნებისმიერ საჭიროებას, მიუხედავად იმისა, კარგი საკრედიტო ისტორია გაქვთ თუ არა.
+        <br />
+        გადახდის სეზონური გრაფიკი კი, საშუალებას მოგცემთ სესხი თქვენს შემოსავლებზე მორგებული შენატანებით დაფაროთ.
+    </p>
+
+
+
+    <div class="loan-conditions-div">
+    <div @onclick="@(() => _showLoanConditions = !_showLoanConditions)" class="loan-conditions @(_showLoanConditions?"active":"")">
+        <p>პირობები</p>
+
+        <MudIcon Icon="@(_showLoanConditions? "fas fa-angle-up icon": "fas fa-angle-down icon")"></MudIcon>
+    </div>
+    <div class="@(_showLoanConditions ? "conditions-list": "d-none")">
+        <ul>
+            <li>სესხის ვალუტა - ლარი</li>
+            <li>სესხის ვადა - 60 თვემდე, მიწის შეძენის შემთხვევაში - 120 თვემდე</li>
+            <li>საშეღავათო პერიოდი - 11 თვემდე როგორც ძირ თანხაზე, ასევე ძირ თანხასა და საპროცენტო განაკვეთზე</li>
+            <li>დაფარვის სიხშირე - როგორც სტანდარტული, ასევე სეზონური გადახდის გრაფიკი</li>
+        </ul>
+
+
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="make-loan-agro-page">
+    <CommunicateLoanExpertForm></CommunicateLoanExpertForm>
+</div>
+
+
+@code {
+    private bool _showLoanConditions;
+
+}

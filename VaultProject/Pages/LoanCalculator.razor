@@ -1,0 +1,94 @@
+﻿@page "/LoanCalculator"
+@using VaultProject.Data
+
+@inject IDialogService DialogService
+
+<div class="loan-calc-form">
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-center calc">
+                <div class="calc-option @(!_isSelfEmployed? "active" : "")" @onclick="@(() => _isSelfEmployed=false)">ხელფასი</div>
+                <div class="calc-option @(_isSelfEmployed? "active" : "")" @onclick="@(() => _isSelfEmployed=true)">თვითდასაქმებული</div>
+
+
+            </div>
+            <div class="calc">
+                @if (_isSelfEmployed)
+                {
+                    <MudSelect T="Professions" Label="პროფესია" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" TextChanged="@(value => GetProfessions(value))">
+                        @foreach (var profesion in Enum.GetValues<Professions>())
+                        {
+                            <MudSelectItem Value="@profesion">@EnumExtensions.GetDisplayName(profesion)</MudSelectItem>
+                        }
+
+                    </MudSelect>
+                    <MudNumericField T="int" Label="შემოსავალი" Variant="Variant.Outlined" Class="input" ValueChanged="@(value => GetSelfEmployedIncome(value))"></MudNumericField>
+                }
+                else
+                {
+                    <MudNumericField T="int" Value="(int)_loanAmount" ValueChanged="@(e => GetLoanAmount(e))" Label="სესხის თანხა" Variant="Variant.Outlined" Class="input" Min="1000" Max="30000"></MudNumericField>
+                    <MudNumericField T="int" Value="_loanPeriod" ValueChanged="@(e => GetLoanTerm(e))" Label="ვადა" Variant="Variant.Outlined" Class="input" Min="1" Max="36"></MudNumericField>
+
+                }
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="calc-result">
+                @if (_isSelfEmployed)
+                {
+                    <h3>@_loanMaxAmount</h3>
+                    <p>სესხის მაქსიმალური ლიმიტი</p>
+                }
+                else
+                {
+                    <h3>@_loanTax</h3>
+                    <p>ყოველთვიური გადასახადი</p>
+                }
+
+
+                <table>
+                    @if (_isSelfEmployed)
+                    {
+                        <tr>
+                            <th>შემოსავალი: </th>
+                            <td>@_selfEmployedIncome</td>
+
+                        </tr>
+
+                    }
+                    else
+                    {
+
+
+                        <tr>
+                            <th>თანხა: </th>
+                            <td>@_loanAmount ₾</td>
+
+                        </tr>
+                    }
+                    <tr>
+                        <th>საპროცენტო განაკვეთი: </th>
+                        <td>@_rate %</td>
+
+                    </tr>
+                    <tr>
+                        <th>ვადა:</th>
+                        <td>@_loanPeriod თვე</td>
+
+                    </tr>
+                    <tr>
+                        <th>ეფექტური პაროცენტო განაკვეთი:</th>
+                        <td>@_efectiveRate %</td>
+
+                    </tr>
+                </table>
+            </div>
+            <MudButton @onclick="OpenLoanForm" Class="button">სესხის მოთხოვნა</MudButton>
+        </div>
+    </div>
+
+
+
+</div>
