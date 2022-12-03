@@ -17,7 +17,7 @@
             <div class="calc">
                 @if (_isSelfEmployed)
                 {
-                    <MudSelect T="Professions" Label="პროფესია" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" TextChanged="@(value => GetProfessions(value))">
+                    <MudSelect T="Professions" Label="პროფესია" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" ValueChanged="@(value => GetProfessions(value))">
                         @foreach (var profesion in Enum.GetValues<Professions>())
                         {
                             <MudSelectItem Value="@profesion">@EnumExtensions.GetDisplayName(profesion)</MudSelectItem>

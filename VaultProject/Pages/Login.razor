@@ -1,0 +1,18 @@
+﻿@page "/login"
+<div id="login">
+
+    <form class="login-form">
+        <h3>ავტორიზაცია</h3>
+        <MudTextField T="string" Label="მომხმარებლის სახელი" Variant="Variant.Outlined" Class="input"></MudTextField>
+        <MudTextField T="string" Label="პაროლი" Variant="Variant.Outlined" Class="input"></MudTextField>
+
+        <MudButton Class="button" ButtonType="ButtonType.Submit">შესვლა</MudButton>
+
+    </form>
+</div>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+}

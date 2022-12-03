@@ -1,5 +1,11 @@
-﻿<MudIcon Icon="@((showNavmenu) ? "fa fa-times": "fas fa-bars")" Color="Color.Success" @onclick="ShowHideMenu" Class="menu-icon"></MudIcon>
-@if (showNavmenu)
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+@*<MudIcon Icon="@((showNavmenu) ? "fa fa-times": "fas fa-bars")" Color="Color.Success" @onclick="ShowHideMenu" Class="menu-icon"></MudIcon>
+*@
+@if (false) //showNavmenu
 {
 
     <div class="sidebar">
@@ -12,6 +18,25 @@
         </MudNavMenu>
     </div>
 }
+
+
+<MudNavMenu Class="menu">
+    <MudNavLink Href="" Match="NavLinkMatch.All">მთავარი</MudNavLink>
+    <MudNavLink Href="/AgroLoans" Match="NavLinkMatch.Prefix">აგრო სესხი</MudNavLink>
+    <MudNavLink Href="/LoanCalculator" Match="NavLinkMatch.Prefix">სესხის კალკულატორი</MudNavLink>
+    <MudNavLink Href="/Contact" Match="NavLinkMatch.Prefix" Class="navLink">კონტაქტი</MudNavLink>
+
+    <AuthorizeView>
+        <Authorized>
+            Hello, @context.User.Identity?.Name!
+        </Authorized>
+        <NotAuthorized>
+    <MudNavLink Href="/Login" Match="NavLinkMatch.Prefix" Class="navLink login-user" Icon="fas fa-user">შესვლა</MudNavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+
+
+</MudNavMenu>
 @code {
     public bool showNavmenu { get; set; }
 
